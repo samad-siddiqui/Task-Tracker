@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Projects</h2>
+    <div class="row justify-content-center">
+        {% for project in projects %}
+        <div class="col-md-6">
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text">{{ project.description }}</p>
+                    <p class="text-muted">
+                        Start: {{ project.start_date|date:"Y-m-d" }} | 
+                        End: {{ project.end_date|default:"Ongoing" }}
+                    </p>
+                    <p><strong>Team Members:</strong></p>
+                    <ul class="list-group">
+                        {% for member in project.team_member.all %}
+                            <li class="list-group-item">{{ member.profile.user.username }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{% url 'create_project' %}" class="btn btn-primary mt-3">Add New Project </a>
+                    <a href="{% url 'project_detail' project.id %}" class="btn btn-primary mt-3">View Tasks</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No projects available.</p>
+        <a href="{% url 'create_project' %}" class="btn btn-success mt-3">Add New Project</a>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

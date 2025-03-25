@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Task List</h1>
+
+    <!-- Task List -->
+    <ul class="list-group my-4">
+        {% for task in tasks %}
+            <li class="list-group-item">
+                {{ task.title }}
+                <a href="{% url 'task_detail' task.pk %}" class="btn btn-sm btn-primary float-end">View</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item text-muted">No tasks available.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Add New Task -->
+    <div class="card p-4">
+        <h2>Add New Task</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Add Task</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

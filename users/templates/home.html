@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1>Welcome to Task Tracker</h1>
+    <div class="mt-4 p-4 border rounded shadow-sm d-flex flex-column gap-3 w-50 mx-auto">
+        <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Profile</a>
+        <a href="{% url 'project_list' %}" class="btn btn-secondary btn-lg">Project</a>
+        <a href="{% url 'task_list' %}" class="btn btn-success btn-lg">Task</a>
+        <a href="{% url 'task_list' %}" class="btn btn-info btn-lg">Comment</a>
+    </div>
+</div>
+{% endblock content %}"

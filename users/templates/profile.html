@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style="width: 150px; height: 150px; object-fit: cover;">
+      <hr>
+      <div class="media-body">
+        <legend class = "border-botton mb-4">
+          Profil Info
+        </legend>
+        <h2 class="account-heading">{{user.username.upper}}</h2>
+        <p class="text-secondary">{{user.email}}</p>
+        <p class="text-secondary">{{ user.profile.bio }}</p>
+      </div>
+    </div>
+    <hr>
+    <form method="POST" enctype='multipart/form-data'>
+      {% csrf_token %}
+      <fieldset class = "form-group">
+          <legend class = "border-botton mb-4">
+             Edit Profil Info
+          </legend>
+          {{ u_form|crispy }}
+          {{ p_form|crispy }}
+      </fieldset>
+      <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-outline-info" type="submit">Update</button>
+      </div>
+  </form> 
+  </div>
+
+{% endblock content %}
